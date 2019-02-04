@@ -659,13 +659,13 @@ public class ApiClient {
      * @return Escaped string
      */
     public String escapeString(String str) {
-    	try {
-            return URLEncoder.encode(str, "utf8").replaceAll("\\+", "%20");
-        } catch (UnsupportedEncodingException e) {
-            return str;
-        }
+    //	try {
+    //        return URLEncoder.encode(str, "utf8").replaceAll("\\+", "%20");
+    //    } catch (UnsupportedEncodingException e) {
+    //        return str;
+    //    }
     	// This a workaround to not escape slash in path parameter 
-    	//return str;
+        return str;
     }
 
     /**
