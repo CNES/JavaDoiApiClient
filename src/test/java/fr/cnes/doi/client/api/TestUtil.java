@@ -72,7 +72,9 @@ public class TestUtil {
 			"</resource>";
 	
 	static String media = "application/pdf=http://www.example.org/test.pdf";
-	static String landingPageUrl = "http://example.org/";		
+	static String landingPageUrl = "http://example.org/";	
 	
+	
+	static String doiMetadataBeginning = "<Resource><identifier><value>10.5072/828606/8C3E91AD45CA855B477126BC073AE44B</value></identifier>";
 
 }
