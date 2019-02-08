@@ -73,7 +73,7 @@ public class TestUtil {
 	
 	static String media = "application/pdf=http://www.example.org/test.pdf";
 	static String landingPageUrl = "http://example.org/";	
-	
+	static String languages = "['af-ZA', 'ar', 'bg-BG', 'ca-AD', 'cs-CZ', 'cy-GB', 'da-DK', 'de-AT', 'de-CH', 'de-DE', 'el-GR', 'en-GB', 'en-US', 'es-CL', 'es-ES', 'es-MX', 'et-EE', 'eu', 'fa-IR', 'fi-FI', 'fr-CA', 'fr-FR', 'he-IL', 'hr-HR', 'hu-HU', 'id-ID', 'is-IS', 'it-IT', 'ja-JP', 'km-KH', 'ko-KR', 'la', 'lt-LT', 'lv-LV', 'mn-MN', 'nb-NO', 'nl-NL', 'nn-NO', 'pl-PL', 'pt-BR', 'pt-PT', 'ro-RO', 'ru-RU', 'sk-SK', 'sl-SI', 'sr-RS', 'sv-SE', 'th-TH', 'tr-TR', 'uk-UA', 'vi-VN', 'zh-CN', 'zh-TW']";
 	
 	static String doiMetadataBeginning = "<Resource><identifier><value>10.5072/828606/8C3E91AD45CA855B477126BC073AE44B</value></identifier>";
 

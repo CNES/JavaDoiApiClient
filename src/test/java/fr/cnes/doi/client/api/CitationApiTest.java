@@ -57,7 +57,7 @@ public class CitationApiTest {
     @Test
     public void getCitationsLanguageTest() throws ApiException {
         List<String> response = api.getCitationsLanguage();
-        assert(!response.isEmpty()); 
+        assert(!response.equals(TestUtil.languages)); 
     }
     
     /**
