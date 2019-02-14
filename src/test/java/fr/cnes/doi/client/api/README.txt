@@ -7,3 +7,4 @@ the testing database.
 The user "test" and the project "CFOSAT, 828606" should be added to the testing database
 The token present in MdsApiTest should be added to the testing datbase
  
+To launch https api tests, certificates should be provided for java and python programs

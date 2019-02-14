@@ -77,4 +77,7 @@ public class TestUtil {
 	
 	static String doiMetadataBeginning = "<Resource><identifier><value>10.5072/828606/8C3E91AD45CA855B477126BC073AE44B</value></identifier>";
 
+	static String httpbasePath = "http://localhost:8182";
+	static String httpsbasePath = "https://localhost:8183";
+	
 }

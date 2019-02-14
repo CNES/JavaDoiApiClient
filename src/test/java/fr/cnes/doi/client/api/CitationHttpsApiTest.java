@@ -18,15 +18,16 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import fr.cnes.doi.client.ApiClient;
 import fr.cnes.doi.client.ApiException;
 import fr.cnes.doi.client.api.CitationApi;
 
 /**
  * API tests for CitationApi
  */
-public class CitationApiTest {
+public class CitationHttpsApiTest {
 
-    private final CitationApi api = new CitationApi();
+	private final CitationApi api = new CitationApi(new ApiClient().setBasePath(TestUtil.httpsbasePath));
 
     
     /**

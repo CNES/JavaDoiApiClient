@@ -24,27 +24,27 @@ import fr.cnes.doi.client.auth.ApiKeyAuth;
 /**
  * API tests for MdsApi
  */
-public class MdsApiTest {
+public class MdsBasicAuthHttpsApiTest {
 
     private static MdsApi api;
     
     /**
-     * Token for user "test" with project "828606". (User and project must be in database)
+     * Basic Auth for user "test" with project "828606". (User and project must be in database)
      */
-    private final static String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIke3Byb2plY3QuYXJ0aWZhY3RJZH0iLCJpYXQiOjE1NDk0NjE0MzgsInN1YiI6InRlc3QiLCJwcm9qZWN0SUQiOjgyODYwNiwicHJvamVjdE5hbWUiOiJDRk9TQVQiLCJleHAiOjQ3MDUxMzUwMzh9.XDAtZIXbXNlbq4PE4RLNEnJC8mGtU7oFgjq7BWoIAQM";
+    private final static String auth = "user:password";
     
     
     @BeforeClass
-    public static void initAuthRequest(){
+    public static void initAuthRequest() {
     	ApiClient defaultClient = Configuration.getDefaultApiClient();
 
     	// Configure API key authorization: APIKeyHeader
     	ApiKeyAuth APIKeyHeader = (ApiKeyAuth) defaultClient.getAuthentication("APIKeyHeader");
-    	APIKeyHeader.setApiKey(token);
+    	APIKeyHeader.setApiKey(auth);
     	// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-    	APIKeyHeader.setApiKeyPrefix("Bearer");
+    	APIKeyHeader.setApiKeyPrefix("Basic");
     	
-    	api = new MdsApi();
+    	api = new MdsApi(new ApiClient().setBasePath(TestUtil.httpsbasePath));
     }
     
     /**
