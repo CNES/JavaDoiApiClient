@@ -13,6 +13,8 @@
 
 package fr.cnes.doi.client.api;
 
+import java.util.Base64;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,7 +33,8 @@ public class MdsBasicAuthHttpApiTest {
     /**
      * Basic Auth for user "test" with project "828606". (User and project must be in database)
      */
-    private final static String auth = "user:password";
+//    private final static String auth = "user:password";
+    private final static String auth = "test:password";
     
     @BeforeClass
     public static void initAuthRequest(){
@@ -39,11 +42,11 @@ public class MdsBasicAuthHttpApiTest {
 
     	// Configure API key authorization: APIKeyHeader
     	ApiKeyAuth APIKeyHeader = (ApiKeyAuth) defaultClient.getAuthentication("APIKeyHeader");
-    	APIKeyHeader.setApiKey(auth);
+    	APIKeyHeader.setApiKey(Base64.getEncoder().encodeToString(auth.getBytes()));
     	// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     	APIKeyHeader.setApiKeyPrefix("Basic");
     	
-    	api = new MdsApi(new ApiClient().setBasePath(TestUtil.httpbasePath));
+    	api = new MdsApi(defaultClient.setBasePath(TestUtil.httpbasePath));
     }
     
     /**

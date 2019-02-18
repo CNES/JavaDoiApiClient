@@ -44,7 +44,7 @@ public class MdsTokenAuthHttpApiTest {
     	// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     	APIKeyHeader.setApiKeyPrefix("Bearer");
     	
-    	api = new MdsApi(new ApiClient().setBasePath(TestUtil.httpbasePath));
+    	api = new MdsApi(defaultClient.setBasePath(TestUtil.httpbasePath));
     }
     
     /**
