@@ -733,7 +733,9 @@ public class ApiClient {
      * @throws ApiException If fail to serialize the given object
      */
     public RequestBody serialize(Object obj, String contentType) throws ApiException {
-        if (obj instanceof byte[]) {
+        if (obj instanceof String) {
+            return RequestBody.create(MediaType.parse(contentType), ((String) obj).getBytes());
+        } else if (obj instanceof byte[]) {
             // Binary (byte array) body parameter support.
             return RequestBody.create(MediaType.parse(contentType), (byte[]) obj);
         } else if (obj instanceof File) {

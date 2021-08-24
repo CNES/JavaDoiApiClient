@@ -104,6 +104,97 @@ public class AdministrationApiExample {
 
 ```
 
+A small example to create the DOI using the client.
+
+```java
+
+package testdoiapiclient;
+
+import io.swagger.client.*;
+import io.swagger.client.api.AdministrationApi;
+import io.swagger.client.api.DataCiteMetadataStoreMdsApiApi;
+import io.swagger.client.auth.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author malapert
+ */
+public class TestDoiApiClient {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        String xml="<INSTANCE XML BASED ON THE DATACITE SCHEMA>";
+        String doi="<DOI IDENTIFIER - DOI IS CONTAINED IN xml String";
+        String url="<URL OF THE LANDING PAGE>";
+        if (!xml.contains(doi)) {
+            throw new RuntimeException("The XML is not the description of the DOI "+doi);
+        }
+        try {
+            TestDoiApiClient doiClient = new TestDoiApiClient("YOUR USERNAME", "YOUR PASSWORD");
+            doiClient.postMetadata(xml);
+            doiClient.postLandingPage(url, doi);
+        } catch (ApiException ex) {
+            Logger.getLogger(TestDoiApiClient.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }        
+    }
+
+    private String token;
+    private final ApiClient defaultClient;
+    private final AdministrationApi apiInstance;
+    private final DataCiteMetadataStoreMdsApiApi mdsApi;
+
+    public TestDoiApiClient(final String login, final String pwd) throws ApiException {        
+        this.defaultClient = Configuration.getDefaultApiClient();
+        HttpBasicAuth basicAuth = (HttpBasicAuth) this.defaultClient.getAuthentication("basicAuth");
+        basicAuth.setUsername(login);
+        basicAuth.setPassword(pwd);
+        this.apiInstance = new AdministrationApi();
+        this.token = this.apiInstance.createToken();
+        ApiKeyAuth Bearer = (ApiKeyAuth) this.defaultClient.getAuthentication("Bearer");
+        Bearer.setApiKey(this.token);
+        Bearer.setApiKeyPrefix("Bearer");    
+        this.mdsApi = new DataCiteMetadataStoreMdsApiApi();
+    }
+    public void postMetadata(final String xml) throws ApiException {
+        try {
+            this.mdsApi.postDoiMetadata(xml, null);
+        } catch (ApiException ex) {
+            Logger.getLogger(TestDoiApiClient.class.getName()).log(Level.SEVERE, null, ex);
+            int httpStatusCode = ex.getCode();
+            if (httpStatusCode == 401) {
+                // Pb with token, it could be expired, try to create a new one
+                this.token = this.apiInstance.createToken();
+                this.postMetadata(xml);
+            } else {
+                // other pb, go out
+                throw new ApiException(ex);
+            }
+        }
+    }
+    
+    public void postLandingPage(final String url, final String doi) throws ApiException {
+        try {
+            this.mdsApi.postLandingPage(url, doi, null);
+        } catch (ApiException ex) {
+            Logger.getLogger(TestDoiApiClient.class.getName()).log(Level.SEVERE, null, ex);
+            int httpStatusCode = ex.getCode();
+            if (httpStatusCode == 401) {
+                // Pb with token, it could be expired, try to create a new one
+                this.token = this.apiInstance.createToken();
+                this.postLandingPage(url, doi);
+            } else {
+                // other pb, go out
+                throw new ApiException(ex);
+            }            
+        }
+    }
+}
+```
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://localhost:8183*
